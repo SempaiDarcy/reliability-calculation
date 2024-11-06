@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оценка Программного Обеспечения</title>
+    <link rel="stylesheet" href="/style/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Оценка Программного Обеспечения</h1>
+    <div class="tab-container">
+        <div class="tab active" onclick="openTab(event, 'qualitative')">Метрика качественных показателей</div>
+        <div class="tab" onclick="openTab(event, 'reliability')">Оценка надёжности ПО</div>
+        <div class="tab" onclick="openTab(event, 'corcoran')">Модель Коркорэна</div>
+        <div class="tab" onclick="openTab(event, 'schumann')">Модель Шумана</div>
+        <div class="tab" onclick="openTab(event, 'economic')">Технико-экономические показатели</div>
+    </div>
+
+    <!-- Вкладка Метрики Качественных Показателей -->
+    <div id="qualitative" class="tab-content">
+        <h2>Метрика Качественных Показателей</h2>
+        <div class="input-group">
+            <label for="metrics">Показатели качества (значения, через запятую):</label>
+            <input type="text" id="metrics" placeholder="Например, 0.8, 0.9, 0.85, 0.7, 0.95">
+        </div>
+        <div class="input-group">
+            <label for="weights">Вес каждого показателя (через запятую):</label>
+            <input type="text" id="weights" placeholder="Например, 0.2, 0.3, 0.25, 0.15, 0.1">
+        </div>
+        <button onclick="calculateQualitative()">Рассчитать</button>
+        <p id="resultQualitative"></p>
+    </div>
+
+
+    <!-- Вкладка Оценка Надёжности ПО -->
+    <div id="reliability" class="tab-content active">
+        <h2>Оценка Надёжности ПО</h2>
+        <div class="input-group">
+            <label for="lambda">Интенсивность отказов (λ):</label>
+            <input type="number" id="lambda" step="0.01" placeholder="Введите интенсивность отказов">
+        </div>
+        <div class="input-group">
+            <label for="time">Время работы (t):</label>
+            <input type="number" id="time" placeholder="Введите время работы">
+        </div>
+        <div class="input-group">
+            <label for="mttf">Средняя наработка до отказа (MTTF):</label>
+            <input type="number" id="mttf" placeholder="Если неизвестно, будет рассчитано автоматически">
+        </div>
+        <div class="input-group">
+            <label for="mttr">Среднее время восстановления (MTTR):</label>
+            <input type="number" id="mttr" placeholder="Введите MTTR">
+        </div>
+        <button onclick="calculateReliability()">Рассчитать</button>
+        <p id="resultReliability"></p>
+    </div>
+
+
+    <!-- Вкладка Модель Коркорэна -->
+    <div id="corcoran" class="tab-content">
+        <h2>Модель Коркорэна</h2>
+        <div class="input-group">
+            <label for="N">Общее число испытаний (N):</label>
+            <input type="number" id="N" placeholder="Введите число испытаний">
+        </div>
+        <div class="input-group">
+            <label for="N0">Число безотказных испытаний (N0):</label>
+            <input type="number" id="N0" placeholder="Введите число безотказных испытаний">
+        </div>
+        <div class="input-group">
+            <label for="Y">Вероятности ошибок для каждого испытания (через запятую):</label>
+            <input type="text" id="Y" placeholder="Например, 0.1, 0.05, 0.02">
+        </div>
+        <button onclick="calculateCorcoran()">Рассчитать</button>
+        <p id="resultCorcoran"></p>
+    </div>
+
+
+    <!-- Вкладка Модель Шумана -->
+    <div id="schumann" class="tab-content">
+        <h2>Модель Шумана</h2>
+        <div class="input-group">
+            <label for="Et">Число ошибок до начала тестирования (Et):</label>
+            <input type="number" id="Et" placeholder="Введите Et">
+        </div>
+        <div class="input-group">
+            <label for="It">Общее число команд (It):</label>
+            <input type="number" id="It" placeholder="Введите It">
+        </div>
+        <div class="input-group">
+            <label for="Ec">Число ошибок на интервал времени (Ec):</label>
+            <input type="number" id="Ec" placeholder="Введите Ec">
+        </div>
+        <button onclick="calculateSchumann()">Рассчитать</button>
+        <p id="resultSchumann"></p>
+    </div>
+
+    <!-- Вкладка Технико-Экономические Показатели -->
+    <div id="economic" class="tab-content">
+        <h2>Технико-Экономические Показатели</h2>
+        <div class="input-group">
+            <label for="T0">Трудозатраты базового варианта (T0):</label>
+            <input type="number" id="T0" placeholder="Введите T0">
+        </div>
+        <div class="input-group">
+            <label for="T1">Трудозатраты текущего варианта (T1):</label>
+            <input type="number" id="T1" placeholder="Введите T1">
+        </div>
+        <button onclick="calculateEconomic()">Рассчитать</button>
+        <p id="resultEconomic"></p>
+    </div>
+</div>
+<script src="js/index.js"></script>
+</body>
+</html>
